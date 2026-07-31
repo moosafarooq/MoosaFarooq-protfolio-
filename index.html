@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moosa Farooq — Portfolio</title>
+<meta name="description" content="Portfolio of Moosa Farooq: about, projects, skills, and contact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #ede9dd;
+    --ink: #1f2b38;
+    --ink-soft: #4a5563;
+    --rule: #c9c2ac;
+    --highlight: #f2b705;
+    --pen: #b5432a;
+    --tab: #2e4034;
+    --tab-light: #3d5346;
+    --card: #f6f4ea;
+    --radius: 2px;
+    --max-w: 780px;
+  }
+
+  * { box-sizing: border-box; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background:
+      repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 35px,
+        var(--rule) 35px,
+        var(--rule) 36px
+      ),
+      var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    color: var(--ink);
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  a {
+    color: var(--pen);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 3px solid var(--pen);
+    outline-offset: 3px;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.75rem 1.25rem;
+    z-index: 100;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
+  }
+  .skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+  }
+
+  /* ---------- Layout shell ---------- */
+  .page {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  /* Notebook tab navigation */
+  .tabs {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 3rem;
+    gap: 0.75rem;
+  }
+
+  .tabs a {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    background: var(--tab);
+    color: var(--card);
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    padding: 0.9rem 0.5rem;
+    border-radius: 0 6px 6px 0;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.15);
+  }
+
+  .tabs a:hover,
+  .tabs a:focus-visible {
+    background: var(--tab-light);
+    outline: none;
+  }
+
+  .content {
+    min-width: 0;
+    padding: 0 1.5rem 4rem;
+  }
+
+  section, header, footer {
+    max-width: var(--max-w);
+  }
+
+  /* ---------- Header ---------- */
+  .site-header {
+    padding: 4rem 0 2.5rem;
+  }
+
+  .site-header .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pen);
+    display: inline-block;
+    margin-bottom: 0.9rem;
+    position: relative;
+  }
+  .site-header .eyebrow::before {
+    content: "//";
+    margin-right: 0.4em;
+    opacity: 0.6;
+  }
+
+  .site-header h1 {
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    font-weight: 700;
+  }
+
+  .identity {
+    margin-top: 0.85rem;
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    position: relative;
+    display: inline;
+  }
+
+  .identity mark {
+    background: linear-gradient(to top, var(--highlight) 35%, transparent 35%);
+    color: inherit;
+    padding: 0 0.1em;
+  }
+
+  /* ---------- Section labels (margin-note style) ---------- */
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tab);
+    margin-bottom: 0.6rem;
+  }
+
+  .section-label::before {
+    content: "";
+    width: 22px;
+    height: 2px;
+    background: var(--pen);
+    display: inline-block;
+  }
+
+  main section {
+    padding: 2.75rem 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  main section:first-of-type { border-top: none; }
+
+  main section h2 {
+    font-size: 1.7rem;
+    margin-bottom: 1rem;
+  }
+
+  .about p { margin: 0 0 1rem; color: var(--ink-soft); }
+  .about p:last-child { margin-bottom: 0; }
+
+  /* ---------- Projects ---------- */
+  .project-list {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 1.4rem 1.5rem;
+    position: relative;
+  }
+
+  .project-card::before {
+    content: "";
+    position: absolute;
+    top: 0.9rem;
+    left: -1px;
+    width: 4px;
+    height: calc(100% - 1.8rem);
+    background: var(--pen);
+  }
+
+  .project-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .project-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+
+  .project-card p {
+    margin: 0 0 0.8rem;
+    color: var(--ink-soft);
+  }
+
+  .project-links {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+  }
+
+  /* ---------- Skills ---------- */
+  .skills-groups {
+    display: grid;
+    gap: 1.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .skills-groups h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+    margin-bottom: 0.7rem;
+  }
+
+  .skill-tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .skill-tags li {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    padding: 0.35rem 0.7rem;
+    border-radius: 3px;
+  }
+
+  /* ---------- Contact / footer ---------- */
+  .site-footer {
+    margin-top: 1rem;
+    padding: 2.75rem 0 3.5rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .contact-card {
+    background: var(--tab);
+    color: var(--card);
+    padding: 2rem 2.2rem;
+    border-radius: var(--radius);
+    clip-path: polygon(
+      0 0, 100% 0, 100% calc(100% - 14px),
+      calc(100% - 14px) 100%, 0 100%
+    );
+  }
+
+  .contact-card h2 {
+    color: var(--card);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-card p {
+    color: #d9ddd6;
+    margin: 0 0 1.3rem;
+  }
+
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.7rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
+  }
+
+  .contact-list a {
+    color: var(--highlight);
+    text-decoration-color: rgba(242,183,5,0.5);
+  }
+
+  .contact-list a:focus-visible {
+    outline-color: var(--highlight);
+  }
+
+  .contact-list span.label {
+    color: #9ea896;
+    margin-right: 0.5rem;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 640px) {
+    .page {
+      grid-template-columns: 1fr;
+    }
+    .tabs {
+      position: static;
+      height: auto;
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 1.25rem 0.5rem;
+      gap: 0.5rem;
+    }
+    .tabs a {
+      writing-mode: horizontal-tb;
+      border-radius: 6px;
+      padding: 0.5rem 0.8rem;
+    }
+    .content { padding: 0 1.1rem 3rem; }
+    .contact-card { padding: 1.6rem 1.4rem; }
+  }
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <div class="page">
+    <nav class="tabs" aria-label="Section navigation">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="content">
+      <header class="site-header">
+        <span class="eyebrow">Portfolio</span>
+        <h1>Moosa Farooq</h1>
+        <p class="identity">o level student intrested in AI, web development, and technology <mark>practical, well-crafted software</mark> — one project at a time.</p>
+      </header>
+
+      <main id="main-content">
+        <section id="about" aria-labelledby="about-heading">
+          <span class="section-label">About</span>
+          <h2 id="about-heading">A bit about me</h2>
+          <div class="about">
+            <p>Hi, iam moosa farooq an o level student who enjoys learning about AI and web development. i like building websites and learning new technology.</p>
+            <p>I have completed AI builders bootcamp project and want to improve my programing skils by creating more projects.</p>
+          </div>
+        </section>
+
+        <section id="work" aria-labelledby="work-heading">
+          <span class="section-label">Projects &amp; Achievements</span>
+          <h2 id="work-heading">Selected work</h2>
+          <ul class="project-list">
+            <li class="project-card">
+              <span class="project-meta">Project — 2025</span>
+              <h3>AI Builder Bootcamp protfolio website</h3>
+              <p>A short description of the project: what problem it solves, the approach taken, and the impact or outcome. Replace this with your own summary.</p>
+              <div class="project-links">
+                <a href="#">View code</a>
+                <a href="#">Live demo</a>
+              </div>
+            </li>
+            <li class="project-card">
+              <span class="project-meta">Achievement — 2025</span>
+              <h3>voltage fitness club website</h3>
+              <p>Description of a second project or a notable achievement — a competition placement, a published paper, a hackathon win, or similar. Replace with your own details.</p>
+              <div class="project-links">
+                <a href="#">View code</a>
+                <a href="#">Read more</a>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section id="skills" aria-labelledby="skills-heading">
+          <span class="section-label">Skills</span>
+          <h2 id="skills-heading">Tools &amp; technologies</h2>
+          <div class="skills-groups">
+            <div>
+              <h3>Languages</h3>
+              <ul class="skill-tags">
+                <li>Python</li>
+                <li>JavaScript</li>
+                <li>Java</li>
+                <li>C++</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Frameworks &amp; tools</h3>
+              <ul class="skill-tags">
+                <li>React</li>
+                <li>Node.js</li>
+                <li>Git</li>
+                <li>SQL</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Currently learning</h3>
+              <ul class="skill-tags">
+                <li>Data structures &amp; algorithms</li>
+                <li>Cloud fundamentals</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer" id="contact" aria-labelledby="contact-heading">
+        <div class="contact-card">
+          <h2 id="contact-heading">Get in touch</h2>
+          <p>Open to internships, collaborations, and interesting conversations.</p>
+          <ul class="contact-list">
+            <li><span class="label">Email</span><a href="mailto:moosa.farooq@example.com">moosa.farooq@example.com</a></li>
+            <li><span class="label">GitHub</span><a href="https://github.com/">github.com/moosafarooq</a></li>
+            <li><span class="label">LinkedIn</span><a href="https://linkedin.com/">linkedin.com/in/moosafarooq</a></li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
